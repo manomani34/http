@@ -11,6 +11,8 @@ export class AppComponent implements OnInit {
   
   @ViewChild('postTitle') postTitle:ElementRef;
   @ViewChild('postBody') postBody:ElementRef;
+  @ViewChild('postId') postId:ElementRef;
+
   postsArray;
   displayedColumns: string[] = ['userId', 'title', 'body'];
   dataSource: IPost [] ;
@@ -33,5 +35,25 @@ export class AppComponent implements OnInit {
       (response) => console.log(response)
       )
     
+  }
+
+  putPosts(){
+    let id = this.postId.nativeElement.value;
+    let post: IPost = {UserId: 0, Title: '', body: ''};
+    post.UserId = 10;
+    post.Title = this.postTitle.nativeElement.value;
+    post.body = this.postBody.nativeElement.value;
+
+    this.postService.putPosts(post, +id).subscribe(
+      (response) => console.log(response)
+    );
+  }
+
+  deletePosts(){
+    let id = this.postId.nativeElement.value;
+
+    this.postService.deletPosts(+id).subscribe(
+      (response) => console.log(response)
+    )
   }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPost } from './post';
@@ -12,11 +12,24 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  getPosts(): Observable<any>{
+  getPosts(): Observable<any>{  
      return this.http.get(this.url);
   }
+
   postPosts(post: IPost){
-    return this.http.post(this.url, post)
+    const header = new HttpHeaders({
+      'Content-Type' : 'application/json'
+    });
+    return this.http.post(this.url, post , {headers: header})
+  }
+
+  putPosts(post: IPost, id: number){
+    return this.http.put(this.url + "/" + id , post)
+
+  }
+
+  deletPosts(id: number){
+    return this.http.delete(this.url + "/" + id )
   }
 
 }

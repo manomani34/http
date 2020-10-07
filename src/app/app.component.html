@@ -13,6 +13,9 @@
 </div>
         
 <button type="submit" class="btn btn-primary" (click)="addPost()">Add Post</button> 
+<button type="submit" class="btn btn-primary" (click)="putPosts()">Put Post</button> 
+<button type="submit" class="btn btn-primary" (click)="deletePosts()">Delete Post</button> 
+id: <input type="text" #postId>
 
 <div class="example-container mat-elevation-z8">
 <table mat-table [dataSource]="dataSource"  dir="rtl">                      
